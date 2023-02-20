@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import MainPage from "./MainPage";
+import CalendarView from "./CalendarView";
+import Toggle from "../components/Toggle";
 export class Home extends Component {
   render() {
     return (
@@ -11,8 +12,7 @@ export class Home extends Component {
             </h1>
           </div>
         </div>
-
-        <MainPage></MainPage>
+        <CalendarView></CalendarView>
       </div>
     );
   }
