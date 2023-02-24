@@ -33,7 +33,7 @@ export default function Navbar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="block h-8 w-auto lg:hidden"
+                    className="block h-6 w-auto lg:hidden"
                     src={Logo}
                     alt="SC Events"
                   />

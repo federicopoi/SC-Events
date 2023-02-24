@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import {
   BriefcaseIcon,
   CalendarIcon,
+  ClockIcon,
   CheckIcon,
   ChevronDownIcon,
   CurrencyDollarIcon,
@@ -15,11 +16,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Heading({ title, location, date, buton }) {
+export default function Heading({ title, location, date, time, buton }) {
   return (
     <div className="md:flex md:items-center md:justify-between">
       <div className="min-w-0 flex-1">
-        <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+        <h2 className="text-4xl font-bold leading-7 text-gray-900 sm:truncate sm:text-4xl sm:tracking-tight">
           {title}
         </h2>
         <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
@@ -37,6 +38,13 @@ export default function Heading({ title, location, date, buton }) {
             />
             {date}
           </div>
+          <div className="mt-2 flex items-center text-sm text-gray-500">
+            <ClockIcon
+              className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+              aria-hidden="true"
+            />
+            {time}
+          </div>
         </div>
       </div>
       <div className="mt-5 flex lg:mt-0 lg:ml-4">
@@ -50,7 +58,7 @@ export default function Heading({ title, location, date, buton }) {
           </button>
         </span> */}
 
-        <span className="ml-3 hidden sm:block">
+        {/* <span className="ml-3 hidden sm:block">
           <button
             type="button"
             className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -61,19 +69,20 @@ export default function Heading({ title, location, date, buton }) {
             />
             -
           </button>
-        </span>
+        </span> */}
 
         <span className="sm:ml-3">
           <button
             type="button"
             className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
-            <CheckIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />-
+            <CheckIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+            Sign up
           </button>
         </span>
 
         {/* Dropdown */}
-        <Menu as="div" className="relative ml-3 sm:hidden">
+        {/* <Menu as="div" className="relative ml-3 sm:hidden">
           <Menu.Button className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             More
             <ChevronDownIcon
@@ -120,7 +129,7 @@ export default function Heading({ title, location, date, buton }) {
               </Menu.Item>
             </Menu.Items>
           </Transition>
-        </Menu>
+        </Menu> */}
       </div>
     </div>
   );

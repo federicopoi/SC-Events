@@ -17,15 +17,17 @@ export class EventDetail extends Component {
         name: "Benjamin Erdman",
         role: "Student",
       },
+
       // More people...
     ];
     return (
       <div class="bg-black dark:bg-white">
-        <div className="pt-16">
+        <div className="pt-10">
           <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6">
             <Heading
               title="Ping Pong Tournament"
               date="Febrary 21, 2023"
+              time="13:00 - 16:00"
               location="Wally"
             ></Heading>
             {/* <div className="mt-10 flex items-center text-lg text-black-500">
@@ -34,13 +36,13 @@ export class EventDetail extends Component {
             <div className="mt-5 flex items-center text-lg text-black-500">
               Bring your own raquets and be ready to play!
             </div> */}
-            <div className="bg-white py-12 sm:py-24">
-              <div className="mx-auto grid max-w-7xl md:grid-cols-2 space-x-4">
+            <div className="bg-white py-10 sm:py-10 ">
+              <div className="mx-auto grid max-w-7xl md:grid-cols-2 space-y-12 md:space-y-0">
                 <div class="col-span-1">
-                  <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-6">
+                  <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-6">
                     People
                   </h2>
-                  <ul role="list" className="grid gap-x-8 gap-y-12">
+                  <ul role="list" className="grid gap-x-8 gap-y-6">
                     {people.map((person) => (
                       <li key={person.name}>
                         <div className="flex items-center gap-x-6">
@@ -71,7 +73,7 @@ export class EventDetail extends Component {
                   </ul>
                 </div>
                 <div className="max-w-2xl">
-                  <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                  <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                     Details
                   </h2>
                   <p className="mt-6 text-lg leading-8 text-gray-600">

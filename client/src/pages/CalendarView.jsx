@@ -89,7 +89,7 @@ export default function CalendarView() {
   );
 
   return (
-    <div className="pt-16">
+    <div className="pt-3 sm:pt-12">
       <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6">
         <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
@@ -174,7 +174,7 @@ export default function CalendarView() {
               ))}
             </div>
           </div>
-          <section className="mt-12 md:mt-0 md:pl-14">
+          <section className="sm:mt-12 mt-6 md:mt-0 md:pl-14">
             <h2 className="font-semibold text-gray-900">
               Schedule for{" "}
               <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
@@ -187,7 +187,7 @@ export default function CalendarView() {
                   <Meeting meeting={meeting} key={meeting.id} />
                 ))
               ) : (
-                <p>No meetings for today.</p>
+                <p>No events for today.</p>
               )}
             </ol>
           </section>
