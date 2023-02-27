@@ -13,10 +13,11 @@ import Find from "./pages/Find";
 import EventDetail from "./pages/EventDetail";
 import NotFoundPage from "./components/NotFoundPage";
 function App() {
+  const login = false;
   return (
     <Router>
       <div className="App">
-        <Navbar></Navbar>
+        {login && <Navbar></Navbar>}
         <Routes>
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/login" element={<LoginPage />} />
