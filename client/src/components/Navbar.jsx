@@ -1,6 +1,12 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+  SunIcon,
+  MoonIcon,
+} from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import Logo from "../media/logo.png";
 const navigation = [
@@ -12,7 +18,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Navbar({ theme, setTheme }) {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -110,13 +116,20 @@ export default function Navbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="javascript:void(0)"
+                            onClick={() => {
+                              theme == `light`
+                                ? setTheme(`dark`)
+                                : setTheme(`light`);
+                            }}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Settings
+                            {theme == "light"
+                              ? "Set Light mode"
+                              : "Set Dark mode"}
                           </a>
                         )}
                       </Menu.Item>

@@ -1,4 +1,5 @@
 import "./App.css";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,20 +14,37 @@ import Find from "./pages/Find";
 import EventDetail from "./pages/EventDetail";
 import NotFoundPage from "./components/NotFoundPage";
 function App() {
-  const login = false;
+  const login = true;
+  const [theme, setTheme] = useState(``);
+
+  useEffect(() => {
+    const localStorageTheme = localStorage.getItem("theme");
+    if (localStorageTheme) {
+      setTheme(localStorageTheme);
+    } else {
+      localStorage.setItem("theme", `light`);
+      setTheme(`light`);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
   return (
-    <Router>
-      <div className="App">
-        {login && <Navbar></Navbar>}
-        <Routes>
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route exact path="/" element={<Home />} />
-          <Route path="/find" element={<Find />} />
-          <Route path="/event" element={<EventDetail />} />
-        </Routes>
-      </div>
-    </Router>
+    <div id="theme-wrapper" className={`${theme} theme-changer`}>
+      <Router>
+        <div className="App">
+          {login && <Navbar theme={theme} setTheme={setTheme}></Navbar>}
+          <Routes>
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route exact path="/" element={<Home />} />
+            <Route path="/find" element={<Find />} />
+            <Route path="/event" element={<EventDetail />} />
+          </Routes>
+        </div>
+      </Router>
+    </div>
   );
 }
 
