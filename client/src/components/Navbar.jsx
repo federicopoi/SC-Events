@@ -8,7 +8,11 @@ import {
   MoonIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import Logo from "../media/logo.png";
+import { logout } from "../store/actions/authActions";
+import { withRouter } from "react-router-dom";
+
 const navigation = [
   { name: "My Events", href: "/", current: true },
   { name: "Find", href: "/find", current: false },
@@ -18,7 +22,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar({ theme, setTheme }) {
+function Navbar({ theme, setTheme, logout }) {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -136,7 +140,7 @@ export default function Navbar({ theme, setTheme }) {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            onClick={logout}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -179,3 +183,8 @@ export default function Navbar({ theme, setTheme }) {
     </Disclosure>
   );
 }
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+  isAuthenticated: state.auth.isAuthenticated,
+});
+export default connect(mapStateToProps, { logout })(withRouter(Navbar));
