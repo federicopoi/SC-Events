@@ -1,5 +1,9 @@
 import { Menu, Transition } from "@headlessui/react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+import {
+  EllipsisVerticalIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/outline";
 import {
   add,
   eachDayOfInterval,
@@ -94,7 +98,7 @@ export default function CalendarView() {
         <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
             <div className="flex items-center">
-              <h2 className="flex-auto font-semibold text-gray-900">
+              <h2 className="flex-auto font-semibold dark:text-gray-900 text-white">
                 {format(firstDayCurrentMonth, "MMMM yyyy")}
               </h2>
               <button
@@ -103,7 +107,7 @@ export default function CalendarView() {
                 className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Previous month</span>
-                {/* <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" /> */}
+                <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
               </button>
               <button
                 onClick={nextMonth}
@@ -111,7 +115,7 @@ export default function CalendarView() {
                 className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Next month</span>
-                {/* <ChevronRightIcon className="w-5 h-5" aria-hidden="true" /> */}
+                <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
             <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
@@ -143,7 +147,7 @@ export default function CalendarView() {
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         isSameMonth(day, firstDayCurrentMonth) &&
-                        "text-gray-900",
+                        "text-gray-400",
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         !isSameMonth(day, firstDayCurrentMonth) &&
@@ -175,7 +179,7 @@ export default function CalendarView() {
             </div>
           </div>
           <section className="sm:mt-12 mt-6 md:mt-0 md:pl-14">
-            <h2 className="font-semibold text-gray-900">
+            <h2 className="font-semibold dark:text-gray-900 text-gray-100">
               Schedule for{" "}
               <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
                 {format(selectedDay, "MMM dd, yyy")}

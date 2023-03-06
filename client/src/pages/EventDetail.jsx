@@ -21,7 +21,10 @@ export class EventDetail extends Component {
       // More people...
     ];
     return (
-      <div class="bg-black dark:bg-white">
+      <div
+        class="bg-gray-700 dark:bg-white"
+        style={{ width: "100wh", height: "100vh" }}
+      >
         <div className="pt-10">
           <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6">
             <Heading
@@ -36,10 +39,10 @@ export class EventDetail extends Component {
             <div className="mt-5 flex items-center text-lg text-black-500">
               Bring your own raquets and be ready to play!
             </div> */}
-            <div className="bg-white py-10 sm:py-10 ">
+            <div className="dark:bg-white bg-gray-700 py-10 sm:py-10">
               <div className="mx-auto grid max-w-7xl md:grid-cols-2 space-y-12 md:space-y-0">
                 <div class="col-span-1">
-                  <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-6">
+                  <h2 className="text-2xl font-bold tracking-tight dark:text-gray-900 text-white sm:text-3xl mb-6">
                     People
                   </h2>
                   <ul role="list" className="grid gap-x-8 gap-y-6">
@@ -53,7 +56,7 @@ export class EventDetail extends Component {
                               alt=""
                             />
                           ) : (
-                            <div class="relative inline-flex items-center justify-center h-16 w-16 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 ">
+                            <div class="relative inline-flex items-center justify-center h-16 w-16 overflow-hidden bg-gray-300 rounded-full dark:bg-gray-600 ">
                               <span class="font-medium text-gray-600 dark:text-gray-300 ">
                                 {person.name.charAt(0)}
                               </span>
@@ -73,10 +76,10 @@ export class EventDetail extends Component {
                   </ul>
                 </div>
                 <div className="max-w-2xl">
-                  <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                  <h2 className="text-2xl font-bold tracking-tight dark:text-gray-900 text-white sm:text-3xl">
                     Details
                   </h2>
-                  <p className="mt-6 text-lg leading-8 text-gray-600">
+                  <p className="mt-6 text-lg leading-8 dark:text-gray-600 text-gray-400">
                     Libero fames augue nisl porttitor nisi, quis. Id ac elit
                     odio vitae elementum enim vitae ullamcorper suspendisse.
                   </p>
