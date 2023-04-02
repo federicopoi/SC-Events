@@ -12,17 +12,21 @@ import { connect } from "react-redux";
 import Logo from "../media/logo.png";
 import { logout } from "../store/actions/authActions";
 
+
 const navigation = [
   { name: "My Events", href: "/", current: true },
   { name: "Find", href: "/find", current: false },
+  { name: "New Event", href: "/newEvent", current: false },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+
 function Navbar({ theme, setTheme, logout, user }) {
-  console.log(user);
+  const name = user && user.name.split(" ");
+  const initials = name && name[0].charAt(0) + name[1].charAt(0);
   return (
     <div>
       {localStorage.token && (
@@ -97,7 +101,7 @@ function Navbar({ theme, setTheme, logout, user }) {
                           <span className="sr-only">Open user menu</span>
                           <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                             <span class="font-medium text-gray-600 dark:text-gray-300">
-                              FP
+                            {initials}
                             </span>
                           </div>
                         </Menu.Button>
@@ -168,7 +172,7 @@ function Navbar({ theme, setTheme, logout, user }) {
 
               <Disclosure.Panel className="sm:hidden">
                 <div className="space-y-1 px-2 pt-2 pb-3">
-                  {navigation.map((item) => (
+                  {navigation.map((item, index) => (
                     <Link to={item.href}>
                       <Disclosure.Button
                         key={item.name}
