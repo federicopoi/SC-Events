@@ -1,12 +1,21 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
 import Find from "./pages/Find";
 import EventDetail from "./pages/EventDetail";
 import NotFoundPage from "./components/NotFoundPage";
+import { connect } from "react-redux";
+
 function App(props) {
   // const login = true;
   const [theme, setTheme] = useState(``);
@@ -26,20 +35,25 @@ function App(props) {
   }, [theme]);
   return (
     <div id="theme-wrapper" className={`${theme} theme-changer`}>
-      <BrowserRouter>
-        <Switch>
-          <div className="App">
-            <Navbar theme={theme} setTheme={setTheme}></Navbar>
-            <Route exact path="/" component={Home}></Route>
-            {/* <Route path="*" component={NotFoundPage} /> */}
-            <Route path="/login" component={LoginPage} />
-            <Route path="/find" component={Find} />
-            <Route path="/event" component={EventDetail} />
-          </div>
-        </Switch>
-      </BrowserRouter>
+      <Router>
+        <div className="App">
+          <Navbar theme={theme} setTheme={setTheme}></Navbar>
+          <Routes>
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route exact path="/" element={<Home />} />
+            <Route path="/find" element={<Find />} />
+            <Route path="/event" element={<EventDetail />} />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user,
+});
+export default connect(mapStateToProps)(App);

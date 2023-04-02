@@ -4,8 +4,8 @@ import { login } from "../../store/actions/authActions";
 import { clearErrors } from "../../store/actions/errorActions";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import Logo from "../../media/logoBlack.png";
-import { withRouter, Redirect } from "react-router-dom";
-
+// import { withRouter } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 export class LoginPage extends Component {
   state = {
     email: "",
@@ -26,10 +26,10 @@ export class LoginPage extends Component {
         });
       }
     }
-    if (isAuthenticated) {
-      this.props.history.push("/");
-      console.log("auth");
-    }
+    // if (isAuthenticated) {
+    //   this.props.history.push("/");
+    //   console.log("auth");
+    // }
   }
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -48,6 +48,9 @@ export class LoginPage extends Component {
     // console.log(user);
   };
   render() {
+    if (this.props.isAuthenticated) {
+      return <Navigate to="/" />;
+    }
     return (
       <div
         style={{
@@ -125,10 +128,10 @@ export class LoginPage extends Component {
 
                   <div className="text-sm">
                     <a
-                      href="#"
+                      href="/register"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
-                      Forgot your password?
+                      New? Register here
                     </a>
                   </div>
                 </div>
@@ -180,6 +183,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   error: state.error,
 });
-export default withRouter(
-  connect(mapStateToProps, { login, clearErrors })(LoginPage)
-);
+export default connect(mapStateToProps, { login, clearErrors })(LoginPage);
