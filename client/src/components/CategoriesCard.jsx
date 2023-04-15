@@ -1,6 +1,6 @@
 import React from "react";
-
-export default function CategoriesCard({ title, img, description }) {
+import { Link } from "react-router-dom";
+export default function CategoriesCard({ title, img, description, id }) {
   return (
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-gray-800 dark:bg-white border-gray-700 dark:border-white">
       <a href="#">
@@ -15,8 +15,8 @@ export default function CategoriesCard({ title, img, description }) {
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
           {description}
         </p>
-        <a
-          href="#"
+        <Link
+          to={`/event/${id}`}
           class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Read more
@@ -33,7 +33,7 @@ export default function CategoriesCard({ title, img, description }) {
               clip-rule="evenodd"
             ></path>
           </svg>
-        </a>
+        </Link>
       </div>
     </div>
   );

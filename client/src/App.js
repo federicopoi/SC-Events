@@ -47,7 +47,7 @@ function App(props) {
             <Route path="/register" element={<RegisterPage />} />
             <Route exact path="/" element={<Home />} />
             <Route path="/find" element={<Find />} />
-            <Route path="/event" element={<EventDetail />} />
+            <Route path="/event/:id" element={<EventDetail />} />
             <Route path="/newEvent" element={<NewEvent />} />
           </Routes>
         </div>

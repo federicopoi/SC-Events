@@ -16,3 +16,7 @@ export const USER_LOADED = "USER_LOADED";
 export const BORRAR_USER = "BORRAR_USER";
 export const CAMBIAR_ROL = "CAMBIAR_ROL";
 export const AGREGAR_HORAS = "AGREGAR_HORAS";
+// Events
+export const GET_EVENTS = "GET_EVENTS";
+export const LOADING_EVENTS = "LOADING_EVENTS";
+export const ADD_EVENT = "ADD_EVENT";

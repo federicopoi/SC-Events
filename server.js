@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const config = require("config");
 const users = require("./routes/api/users");
+const events = require("./routes/api/events");
 const auth = require("./routes/api/auth");
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(express.json());
 
 // DB Config
 const db = config.get("mongoURI");
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 5000;
 
 // Connect to Mongo
 
@@ -27,6 +28,7 @@ mongoose
 // User routes
 app.use("/api/auth", auth);
 app.use("/api/users", users);
+app.use("/api/events", events);
 
 // Step 3
 if (process.env.NODE_ENV === "production") {

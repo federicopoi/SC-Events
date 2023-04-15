@@ -1,7 +1,19 @@
 import React, { Component } from "react";
 import Heading from "../components/Heading";
+import { getEvents } from "../store/actions/eventsActions";
+import { connect } from "react-redux";
+import moment from "moment";
 export class EventDetail extends Component {
+  componentDidMount() {
+    this.props.getEvents();
+  }
   render() {
+    const { events } = this.props.events;
+    const url = new URL(window.location.href);
+    const id = url.pathname.split("/").pop();
+    const currentEvent = events && events.filter(({ _id }) => _id === id);
+    const { eventName, description, location, date, time, details } =
+      currentEvent[0];
     const people = [
       {
         name: "Alexis Alonzo",
@@ -28,10 +40,10 @@ export class EventDetail extends Component {
         <div className="pt-10">
           <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6">
             <Heading
-              title="Ping Pong Tournament"
-              date="Febrary 21, 2023"
-              time="13:00 - 16:00"
-              location="Wally"
+              title={eventName}
+              date={moment(date).format("MMMM Do, YYYY")}
+              time={time}
+              location={location}
             ></Heading>
             {/* <div className="mt-10 flex items-center text-lg text-black-500">
               Details:
@@ -63,10 +75,10 @@ export class EventDetail extends Component {
                             </div>
                           )}
                           <div>
-                            <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                            <h3 className="text-base font-semibold leading-7 tracking-tight dark:text-gray-900 text-white">
                               {person.name}
                             </h3>
-                            <p className="text-sm font-semibold leading-6 text-indigo-600">
+                            <p className="text-sm font-semibold leading-6 text-indigo-400 dark:text-indigo-600">
                               {person.role}
                             </p>
                           </div>
@@ -80,8 +92,7 @@ export class EventDetail extends Component {
                     Details
                   </h2>
                   <p className="mt-6 text-lg leading-8 dark:text-gray-600 text-gray-400">
-                    Libero fames augue nisl porttitor nisi, quis. Id ac elit
-                    odio vitae elementum enim vitae ullamcorper suspendisse.
+                    {details}
                   </p>
                 </div>
               </div>
@@ -93,4 +104,9 @@ export class EventDetail extends Component {
   }
 }
 
-export default EventDetail;
+const mapStateToProps = (state) => {
+  return {
+    events: state.events,
+  };
+};
+export default connect(mapStateToProps, { getEvents })(EventDetail);
