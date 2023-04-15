@@ -29,6 +29,7 @@ export class NewEvent extends Component {
       timeOut,
       organizer,
       details,
+      imageUrl,
     } = this.state;
     const newEvent = {
       eventName,
@@ -38,6 +39,7 @@ export class NewEvent extends Component {
       time: timeIn + " - " + timeOut,
       organizer,
       details,
+      imageUrl,
     };
     this.props.addEvent(newEvent);
   };
@@ -194,7 +196,7 @@ export class NewEvent extends Component {
                       </div>
                     </div>
 
-                    <div className="col-span-full">
+                    {/* <div className="col-span-full">
                       <label
                         htmlFor="cover-photo"
                         className="block text-sm font-medium leading-6 text-white"
@@ -227,7 +229,23 @@ export class NewEvent extends Component {
                           </p>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
+                  </div>
+                  <div class="mt-3"></div>
+                  <label
+                    htmlFor="first-name"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Image URL
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="imageUrl"
+                      id="imageUrl"
+                      onChange={this.onChange}
+                      class="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400 transition-colors duration-200"
+                    />
                   </div>
                 </div>
               </div>

@@ -1,4 +1,10 @@
-import { GET_EVENTS, LOADING_EVENTS, ADD_EVENT } from "../actions/types";
+import {
+  GET_EVENTS,
+  LOADING_EVENTS,
+  ADD_EVENT,
+  ADD_PERSON,
+  DELETE_PERSON,
+} from "../actions/types";
 const initState = {
   events: [],
   loading: false,
@@ -15,10 +21,19 @@ export default function (state = initState, action) {
         addSuccess: false,
       };
     case ADD_EVENT:
+    case ADD_PERSON:
       return {
         ...state,
         events: [action.payload, ...state.events],
         addSuccess: true,
+      };
+    case DELETE_PERSON:
+      return {
+        ...state,
+        events: [
+          action.payload,
+          ...state.events.filter((event) => event._id !== action.payload._id),
+        ],
       };
     case LOADING_EVENTS:
       return {

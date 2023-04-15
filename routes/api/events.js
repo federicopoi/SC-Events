@@ -18,8 +18,16 @@ router.get("/", (req, res) => {
 // @desc Create an Event
 // @access Public
 router.post("/", (req, res) => {
-  const { eventName, description, location, date, time, organizer, details } =
-    req.body;
+  const {
+    eventName,
+    description,
+    location,
+    date,
+    time,
+    organizer,
+    details,
+    imageUrl,
+  } = req.body;
 
   // Simple validation
   if (
@@ -29,7 +37,8 @@ router.post("/", (req, res) => {
     !date ||
     !time ||
     !organizer ||
-    !details
+    !details ||
+    !imageUrl
   ) {
     return res.status(400).json({ msg: "Fill out all fields" });
   }
@@ -42,9 +51,54 @@ router.post("/", (req, res) => {
     time,
     organizer,
     details,
+    imageUrl,
   });
 
   newEvent.save().then((event) => res.json(event));
 });
+
+// @route POST api/events/addPerson
+// @desc Add Person
+// @access Public
+router.post("/addPerson", (req, res) => {
+  const { _id, person } = req.body;
+
+  Event.findById({ _id }).exec((err, event) => {
+    if (err) console.log("Add person ", err);
+
+    const arr = event.people;
+
+    const concatArr = arr.concat(person);
+    event.people = concatArr;
+
+    event.save().then((event) => res.json(event));
+  });
+});
+
+// @route POST api/events/deletePerson
+// @desc Delete Person
+// @access Public
+router.post("/deletePerson", (req, res) => {
+  const { _id, person } = req.body;
+
+  Event.findById({ _id }).exec((err, event) => {
+    if (err) console.log("Delete Person ", err);
+
+    const currentStudentId = person.studentId;
+
+    const arr = event.people;
+
+    const index = arr.findIndex(
+      (person) => person.studentId === currentStudentId
+    );
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    event.people = arr;
+
+    event.save().then((event) => res.json(event));
+  });
+});
+module.exports = router;
 
 module.exports = router;

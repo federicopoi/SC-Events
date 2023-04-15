@@ -1,4 +1,10 @@
-import { GET_EVENTS, LOADING_EVENTS, ADD_EVENT } from "./types";
+import {
+  GET_EVENTS,
+  LOADING_EVENTS,
+  ADD_EVENT,
+  ADD_PERSON,
+  DELETE_PERSON,
+} from "./types";
 
 import { returnErrors } from "./errorActions";
 import axios from "axios";
@@ -32,6 +38,24 @@ export const addEvent = (event) => (dispatch, getState) => {
         returnErrors(err.response.data, err.response.status, "ADD_EVENT_ERROR")
       )
     );
+};
+
+export const addPerson = (person) => (dispatch) => {
+  axios.post("/api/events/addPerson", person).then((res) =>
+    dispatch({
+      type: ADD_PERSON,
+      payload: res.data,
+    })
+  );
+};
+
+export const deletePerson = (person) => (dispatch) => {
+  axios.post("/api/events/deletePerson", person).then((res) =>
+    dispatch({
+      type: DELETE_PERSON,
+      payload: res.data,
+    })
+  );
 };
 
 export const loadingEvents = () => {

@@ -4,7 +4,7 @@ export default function CategoriesCard({ title, img, description, id }) {
   return (
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-gray-800 dark:bg-white border-gray-700 dark:border-white">
       <a href="#">
-        <img class="rounded-t-lg" src={img} alt="" />
+        <img class="rounded-t-lg h-48 object-cover" src={img} alt="" />
       </a>
       <div class="p-5">
         <a href="#">

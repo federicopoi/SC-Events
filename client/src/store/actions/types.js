@@ -20,3 +20,5 @@ export const AGREGAR_HORAS = "AGREGAR_HORAS";
 export const GET_EVENTS = "GET_EVENTS";
 export const LOADING_EVENTS = "LOADING_EVENTS";
 export const ADD_EVENT = "ADD_EVENT";
+export const ADD_PERSON = "ADD_PERSON";
+export const DELETE_PERSON = "DELETE_PERSON";

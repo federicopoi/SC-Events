@@ -32,6 +32,21 @@ const EventSchema = new Schema(
       type: String,
       required: true,
     },
+    people: {
+      type: Array,
+      studentId: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+    },
+    imageUrl: {
+      type: String,
+      required: true,
+    },
   },
   {
     collection: "events",
