@@ -9,7 +9,7 @@ const Event = require("../../models/Event");
 // @access Public
 router.get("/", (req, res) => {
   Event.find()
-    .sort({ date: -1 })
+    .sort({ date: 1 })
     .then((events) => res.json(events))
     .catch((err) => res.status(400).json("Error: " + err));
 });

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import {
   EllipsisVerticalIcon,
@@ -20,6 +21,8 @@ import {
 } from "date-fns";
 import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
+import { getEvents } from "../store/actions/eventsActions";
+import { connect } from "react-redux";
 const meetings = [
   {
     id: 1,
@@ -67,7 +70,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function CalendarView() {
+function CalendarView(props) {
+  useEffect(() => {
+    props.getEvents();
+  }, []);
+  const events = props.events.events;
+  const [enabled, setEnabled] = useState(false);
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -88,12 +96,12 @@ export default function CalendarView() {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
-  let selectedDayMeetings = meetings.filter((meeting) =>
-    isSameDay(parseISO(meeting.startDatetime), selectedDay)
+  let selectedDayMeetings = events.filter((event) =>
+    isSameDay(parseISO(event.date), selectedDay)
   );
 
   return (
-    <div className="pt-3 sm:pt-12 ">
+    <div className="pt-3 sm:pt-12">
       <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6">
         <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
@@ -168,8 +176,8 @@ export default function CalendarView() {
                   </button>
 
                   <div className="w-1 h-1 mx-auto mt-1">
-                    {meetings.some((meeting) =>
-                      isSameDay(parseISO(meeting.startDatetime), day)
+                    {events.some((event) =>
+                      isSameDay(parseISO(event.date), day)
                     ) && (
                       <div className="w-1 h-1 rounded-full bg-sky-500"></div>
                     )}
@@ -179,16 +187,35 @@ export default function CalendarView() {
             </div>
           </div>
           <section className="sm:mt-12 mt-6 md:mt-0 md:pl-14">
-            <h2 className="font-semibold dark:text-gray-900 text-gray-100">
-              Schedule for{" "}
-              <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
-                {format(selectedDay, "MMM dd, yyy")}
-              </time>
-            </h2>
+            <div className="flex items-center">
+              <h2 className="font-semibold dark:text-gray-900 text-gray-100 mr-4">
+                Schedule for{" "}
+                <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
+                  {format(selectedDay, "MMM dd, yyy")}
+                </time>
+              </h2>
+              <label className="inline-flex relative items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  checked={enabled}
+                  readOnly
+                />
+                <div
+                  onClick={() => {
+                    setEnabled(!enabled);
+                  }}
+                  className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-green-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
+                ></div>
+                <span className="ml-2 text-sm font-medium text-white dark:text-gray-900">
+                  {enabled ? "All events" : "My Events"}
+                </span>
+              </label>
+            </div>
             <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
               {selectedDayMeetings.length > 0 ? (
-                selectedDayMeetings.map((meeting) => (
-                  <Meeting meeting={meeting} key={meeting.id} />
+                selectedDayMeetings.map((event) => (
+                  <Event event={event} key={event._id} />
                 ))
               ) : (
                 <p>No events for today.</p>
@@ -201,29 +228,18 @@ export default function CalendarView() {
   );
 }
 
-function Meeting({ meeting }) {
-  let startDateTime = parseISO(meeting.startDatetime);
-  let endDateTime = parseISO(meeting.endDatetime);
-
+function Event({ event }) {
   return (
-    <Link to={"/event/"}>
+    <Link to={`/event/${event._id}`}>
       <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 hover:bg-gray-100">
         <img
-          src={meeting.imageUrl}
+          src={event.imageUrl}
           alt=""
           className="flex-none w-10 h-10 rounded-full"
         />
         <div className="flex-auto">
-          <p className="text-gray-900">{meeting.name}</p>
-          <p className="mt-0.5">
-            <time dateTime={meeting.startDatetime}>
-              {format(startDateTime, "h:mm a")}
-            </time>{" "}
-            -{" "}
-            <time dateTime={meeting.endDatetime}>
-              {format(endDateTime, "h:mm a")}
-            </time>
-          </p>
+          <p className="dark:text-gray-900 text-white">{event.eventName}</p>
+          <p className="mt-0.5">{event.time}</p>
         </div>
         <Menu
           as="div"
@@ -281,6 +297,13 @@ function Meeting({ meeting }) {
     </Link>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    events: state.events,
+    user: state.auth.user,
+  };
+};
+export default connect(mapStateToProps, { getEvents })(CalendarView);
 
 let colStartClasses = [
   "",

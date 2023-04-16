@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 export default function CategoriesCard({ title, img, description, id }) {
   return (
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-gray-800 dark:bg-white border-gray-700 dark:border-white">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-gray-800 dark:bg-white border-gray-700 dark:border-white mb-3 ">
       <a href="#">
-        <img class="rounded-t-lg h-48 object-cover" src={img} alt="" />
+        <img class="rounded-t-lg object-cover" src={img} alt="" />
       </a>
       <div class="p-5">
         <a href="#">
@@ -12,7 +12,7 @@ export default function CategoriesCard({ title, img, description, id }) {
             {title}
           </h5>
         </a>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">
           {description}
         </p>
         <Link
