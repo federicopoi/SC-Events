@@ -135,7 +135,7 @@ export class EventDetail extends Component {
                           ) : (
                             <div class="relative inline-flex items-center justify-center h-16 w-16 overflow-hidden bg-gray-300 rounded-full dark:bg-gray-600 ">
                               <span class="font-medium text-gray-600 dark:text-gray-300 ">
-                                {person.name.charAt(0)}
+                                {getInitials(person.name)}
                               </span>
                             </div>
                           )}
@@ -168,6 +168,15 @@ export class EventDetail extends Component {
     );
   }
 }
+const getInitials = (name) => {
+  const names = name.split(" ");
+  let initials = names[0].substring(0, 1).toUpperCase();
+
+  if (names.length > 1) {
+    initials += names[names.length - 1].substring(0, 1).toUpperCase();
+  }
+  return initials;
+};
 function isCurrentPersonInPeople(people, currentPerson) {
   return people.some(
     (element) =>

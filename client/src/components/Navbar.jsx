@@ -134,10 +134,10 @@ class Navbar extends Component {
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
-                          <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <Menu.Button className="flex rounded-full bg-gray-800 text-sm outline-none ring-2 ring-gray-700 focus:ring-offset-2 ring-offset-gray-800">
                             <span className="sr-only">Open user menu</span>
-                            <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                              <span class="font-medium text-gray-600 dark:text-gray-300">
+                            <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden  rounded-full bg-gray-600">
+                              <span class="font-medium text-gray-300">
                                 {initials}
                               </span>
                             </div>
