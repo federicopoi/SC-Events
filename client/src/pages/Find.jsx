@@ -11,10 +11,7 @@ export class Find extends Component {
     const { events } = this.props.events;
     console.log(events);
     return (
-      <div
-        className="pt-8 dark:bg-gray-200 bg-gray-700"
-        style={{ width: "100wh", height: "100vh" }}
-      >
+      <div className="pt-8 dark:bg-gray-200 bg-gray-700">
         <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6 dark:bg-gray-200 bg-gray-700">
           <h1 class="mb-5 text-4xl font-bold leading-none tracking-tight md:text-5xl lg:text-5xl dark:text-black text-white">
             Find Events

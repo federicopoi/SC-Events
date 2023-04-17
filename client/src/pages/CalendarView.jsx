@@ -23,48 +23,6 @@ import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { getEvents } from "../store/actions/eventsActions";
 import { connect } from "react-redux";
-const meetings = [
-  {
-    id: 1,
-    name: "Ping Pong Tournament",
-    imageUrl:
-      "https://localist-images.azureedge.net/photos/36970367655555/huge/8272936922b6cc3bd308c2cf98f7ebb39771e9a7.jpg",
-    startDatetime: "2023-02-21T13:00",
-    endDatetime: "2022-05-21T14:30",
-  },
-  {
-    id: 2,
-    name: "Michael Foster",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-05-20T09:00",
-    endDatetime: "2022-05-20T11:30",
-  },
-  {
-    id: 3,
-    name: "Dries Vincent",
-    imageUrl:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-05-20T17:00",
-    endDatetime: "2022-05-20T18:30",
-  },
-  {
-    id: 4,
-    name: "Leslie Alexander",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-06-09T13:00",
-    endDatetime: "2022-06-09T14:30",
-  },
-  {
-    id: 5,
-    name: "Michael Foster",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-05-13T14:00",
-    endDatetime: "2022-05-13T14:30",
-  },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -76,6 +34,12 @@ function CalendarView(props) {
   }, []);
   const events = props.events.events;
   const [enabled, setEnabled] = useState(false);
+  let filteredEvents = events;
+  if (enabled) {
+    filteredEvents = events.filter((event) => {
+      return event.people.some((person) => person.name == props.user.name);
+    });
+  }
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -96,7 +60,7 @@ function CalendarView(props) {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
-  let selectedDayMeetings = events.filter((event) =>
+  let selectedDayMeetings = filteredEvents.filter((event) =>
     isSameDay(parseISO(event.date), selectedDay)
   );
 
@@ -176,7 +140,7 @@ function CalendarView(props) {
                   </button>
 
                   <div className="w-1 h-1 mx-auto mt-1">
-                    {events.some((event) =>
+                    {filteredEvents.some((event) =>
                       isSameDay(parseISO(event.date), day)
                     ) && (
                       <div className="w-1 h-1 rounded-full bg-sky-500"></div>
@@ -208,7 +172,7 @@ function CalendarView(props) {
                   className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-green-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
                 ></div>
                 <span className="ml-2 text-sm font-medium text-white dark:text-gray-900">
-                  {enabled ? "All events" : "My Events"}
+                  {enabled ? "My events" : "All Events"}
                 </span>
               </label>
             </div>
@@ -231,7 +195,7 @@ function CalendarView(props) {
 function Event({ event }) {
   return (
     <Link to={`/event/${event._id}`}>
-      <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 hover:bg-gray-100">
+      <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 dark:hover:bg-gray-100 hover:bg-gray-800">
         <img
           src={event.imageUrl}
           alt=""
@@ -276,7 +240,7 @@ function Event({ event }) {
                     </a>
                   )}
                 </Menu.Item>
-                <Menu.Item>
+                {/* <Menu.Item>
                   {({ active }) => (
                     <a
                       href="#"
@@ -288,7 +252,7 @@ function Event({ event }) {
                       Cancel
                     </a>
                   )}
-                </Menu.Item>
+                </Menu.Item> */}
               </div>
             </Menu.Items>
           </Transition>
