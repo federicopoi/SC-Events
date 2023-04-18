@@ -30,7 +30,6 @@
   "devDependencies": {
     "nodemon": "^2.0.3"
   },
-  "heroku-run-build-script": true,
   "author": "Federico Poi",
   "license": "ISC"
 }
