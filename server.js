@@ -12,7 +12,7 @@ app.use(express.json());
 
 // DB Config
 const db = config.get("mongoURI");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 
 // Connect to Mongo
 
