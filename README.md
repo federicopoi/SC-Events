@@ -1,5 +1,7 @@
 # SC EVENTS
 
+This is a project I made from my Senior Project Design class!
+
 Welcome to the Campus Events Website! Your go-to platform for staying informed and engaged with all the exciting events happening on your campus. Whether you're interested in club meetings, guest lectures, social gatherings, or anything in between, we've got you covered.
 
 ## Features
@@ -35,5 +37,7 @@ Let us do the work for you! Opt-in for personalized event recommendations based 
 Get ready to explore, engage, and enhance your campus experience with the Campus Events Website. Join us in making your college journey unforgettable!
 
 Live demo here: https://sc-events-d42f93babff2.herokuapp.com/login
+
+Also, check my final presentation for my Senior Project Design Class here:
 
 [SC+EVENTS+FINAL+PRESENTATION.pdf](https://github.com/federicopoi/SC-Events/files/12493930/SC%2BEVENTS%2BFINAL%2BPRESENTATION.pdf)
